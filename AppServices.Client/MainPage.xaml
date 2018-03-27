@@ -1,0 +1,71 @@
+﻿<Page x:Class="AppServices.Client.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:controls="using:AppServices.Common.Controls">
+
+    <Page.Resources>
+        <Thickness x:Key="DefaultMargin">10</Thickness>
+
+        <Style TargetType="Button">
+            <Setter Property="Margin"
+                    Value="5,0,5,0" />
+            <Setter Property="FontSize"
+                    Value="18" />
+        </Style>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin"
+                    Value="{StaticResource DefaultMargin}" />
+            <Setter Property="FontSize"
+                    Value="16" />
+        </Style>
+
+        <Style TargetType="Rectangle">
+            <Setter Property="Margin"
+                    Value="{StaticResource DefaultMargin}" />
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!--Service info control-->
+        <controls:ServiceInfoControl HostName="{x:Bind viewModel.HostName, Mode=TwoWay}"
+                                     ServiceName="{x:Bind viewModel.ServiceName, Mode=TwoWay}"
+                                     PackageFamilyName="{x:Bind viewModel.PackageFamilyName, Mode=TwoWay}"
+                                     Grid.ColumnSpan="2" />
+
+        <!--Buttons and progress ring-->
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="1">
+            <Button Content="Connect"
+                    Click="{x:Bind viewModel.Connect}" />
+
+            <Button Content="Get color"
+                    IsEnabled="{x:Bind viewModel.IsConnected, Mode=OneWay}"
+                    Click="{x:Bind viewModel.SendRequest}" />
+
+            <ProgressRing IsActive="{x:Bind viewModel.IsConnectionInProgress, Mode=OneWay}" />
+        </StackPanel>
+
+        <!--Status text block-->
+        <TextBlock Text="{x:Bind viewModel.Status, Mode=OneWay}"
+                   Grid.Row="2"
+                   Grid.ColumnSpan="2" />
+
+        <!--Rectangle, depicting the color-->
+        <Rectangle Fill="{x:Bind viewModel.ReceivedColorBrush, Mode=OneWay}"
+                   Grid.Row="3"
+                   Grid.ColumnSpan="2" />
+    </Grid>
+</Page>

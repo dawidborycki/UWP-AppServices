@@ -1,0 +1,68 @@
+﻿<UserControl
+    x:Class="AppServices.Common.Controls.ServiceInfoControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AppServices.Common.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Control.Resources>
+        <Thickness x:Key="DefaultMargin">5</Thickness>
+        <x:Double x:Key="DefaultFontSize">18</x:Double>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin"
+                    Value="{StaticResource DefaultMargin}" />
+            <Setter Property="FontSize"
+                    Value="{StaticResource DefaultFontSize}" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Margin"
+                    Value="{StaticResource DefaultMargin}" />
+            <Setter Property="FontSize"
+                    Value="{StaticResource DefaultFontSize}" />
+            <Setter Property="FontWeight"
+                    Value="SemiBold" />
+        </Style>
+    </Control.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!--Host name-->
+        <TextBlock Text="Host name:" />
+        <TextBox Text="{x:Bind HostName, Mode=TwoWay}"                 
+                 IsReadOnly="{x:Bind IsReadOnly, Mode=OneWay}"
+                 Grid.Column="1" />
+
+        <!--Service name-->
+        <TextBlock Text="Service name:"                   
+                   Grid.Row="1" />
+        <TextBox Text="{x:Bind ServiceName, Mode=TwoWay}"                 
+                 IsReadOnly="{x:Bind IsReadOnly, Mode=OneWay}"
+                 Grid.Row="1"
+                 Grid.Column="1" />
+
+        <!--Package family name-->
+        <TextBlock Text="Package family name:"                   
+                   Grid.Row="2" />
+        <TextBox Text="{x:Bind PackageFamilyName, Mode=TwoWay}"                 
+                 IsReadOnly="{x:Bind IsReadOnly, Mode=OneWay}"
+                 Grid.Row="2"
+                 Grid.Column="1" />
+    </Grid>
+
+</UserControl>

@@ -1,0 +1,28 @@
+﻿<Page
+    x:Class="AppServices.Provider.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:AppServices.Common.Controls"    
+    xmlns:Windows10FallCreatorsUpdate="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 5)">
+
+    <Page.Resources>
+        <Style TargetType="Windows10FallCreatorsUpdate:ColorPicker">
+            <Setter Property="Margin"
+                    Value="10" />
+        </Style>
+    </Page.Resources>
+
+    <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <!--Service info control-->
+        <controls:ServiceInfoControl HostName="{x:Bind viewModel.HostName, Mode=TwoWay}"
+                                     ServiceName="{x:Bind viewModel.ServiceName, Mode=TwoWay}"
+                                     PackageFamilyName="{x:Bind viewModel.PackageFamilyName, Mode=TwoWay}"
+                                     IsReadOnly="True" />
+
+        <!--Color picker-->
+        <Windows10FallCreatorsUpdate:ColorPicker Color="{x:Bind viewModel.CurrentColor, Mode=TwoWay}"
+                                                 VerticalAlignment="Stretch"
+                                                 Grid.Row="3"
+                                                 Grid.ColumnSpan="2" />
+    </StackPanel>
+</Page>
